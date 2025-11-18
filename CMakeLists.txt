@@ -31,10 +31,10 @@ option(USE_CCACHE "Enable ccache, please keep an eye on this because sometimes i
 
 project(portapack-h1)
 
-# --- FIX: Removed strict GCC version check block here ---
+# --- FIX APPLIED: Removed the strict GCC version check block here ---
 # This allows the build to proceed with the newer compiler (GCC 13.3.0)
 # provided by the build environment.
-# --------------------------------------------------------
+# ------------------------------------------------------------------
 
 set(VERSION "$ENV{VERSION_STRING}")
 if ("${VERSION}" STREQUAL "")
