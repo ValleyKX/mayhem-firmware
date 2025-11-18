@@ -5,7 +5,8 @@ on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: portapack-mayhem/build-env:latest
+    # FIXED: Added ghcr.io/ prefix to point to the correct registry
+    container: ghcr.io/portapack-mayhem/build-env:latest
     
     steps:
     - name: Checkout Code
