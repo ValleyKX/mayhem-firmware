@@ -1,0 +1,31 @@
+name: Simple Drone App Build
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: portapack-mayhem/build-env:latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Create Build Directory
+      run: mkdir -p build
+
+    - name: Configure CMake
+      run: cd build && cmake ..
+
+    - name: Compile Drone Scanner
+      # We compile everything to ensure all dependencies are met
+      # then we specifically ask for the drone scanner app
+      run: cd build && make drone_scanner
+
+    - name: Upload App
+      uses: actions/upload-artifact@v4
+      with:
+        name: DroneSentinelApp
+        path: build/firmware/application/external/drone_scanner/*.ppma
